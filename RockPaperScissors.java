@@ -1,5 +1,5 @@
-import java.util.Random;
 import java.util.Scanner;
+import java.util.Random;
 
 public class RockPaperScissors {
 
@@ -8,22 +8,24 @@ public class RockPaperScissors {
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
 
-        String[] choices = {"Rock", "Paper", "Scissors"};
+        String[] choices = { "", "Rock", "Paper", "Scissors" };
 
-        System.out.println("=== ROCK PAPER SCISSORS GAME ===");
+        int userScore = 0;
+        int computerScore = 0;
 
         while (true) {
-            System.out.println("\nChoose an option:");
+
+            System.out.println("\n--- Rock Paper Scissors Game ---");
             System.out.println("1. Rock");
             System.out.println("2. Paper");
             System.out.println("3. Scissors");
-            System.out.println("4. Exit");
+            System.out.println("0. Exit");
 
             System.out.print("Enter your choice: ");
             int userChoice = sc.nextInt();
 
-            if (userChoice == 4) {
-                System.out.println("Thanks for playing!");
+            if (userChoice == 0) {
+                System.out.println("Game Over!");
                 break;
             }
 
@@ -32,21 +34,25 @@ public class RockPaperScissors {
                 continue;
             }
 
-            int computerChoice = rand.nextInt(3);
+            int computerChoice = rand.nextInt(3) + 1;
 
-            System.out.println("You chose: " + choices[userChoice - 1]);
+            System.out.println("You chose: " + choices[userChoice]);
             System.out.println("Computer chose: " + choices[computerChoice]);
 
-            // Game Logic
-            if (userChoice - 1 == computerChoice) {
-                System.out.println("It's a DRAW!");
-            } else if ((userChoice == 1 && computerChoice == 2) ||
-                       (userChoice == 2 && computerChoice == 0) ||
-                       (userChoice == 3 && computerChoice == 1)) {
-                System.out.println("Computer WINS!");
+            if (userChoice == computerChoice) {
+                System.out.println("It's a Draw!");
+            } else if ((userChoice == 1 && computerChoice == 3) ||
+                    (userChoice == 2 && computerChoice == 1) ||
+                    (userChoice == 3 && computerChoice == 2)) {
+
+                System.out.println("You Win!");
+                userScore++;
             } else {
-                System.out.println("You WIN!");
+                System.out.println("Computer Wins!");
+                computerScore++;
             }
+
+            System.out.println("Score -> You: " + userScore + " | Computer: " + computerScore);
         }
 
         sc.close();
